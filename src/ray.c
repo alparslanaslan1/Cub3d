@@ -6,7 +6,7 @@
 /*   By: alpaslan <alpaslan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 20:33:57 by bsen              #+#    #+#             */
-/*   Updated: 2024/11/21 02:53:55 by alpaslan         ###   ########.fr       */
+/*   Updated: 2024/11/22 23:20:37 by alpaslan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,6 @@ void	calculate_step(t_data *data)
 	while (i < 2)
 	{
 		//data.step ışının hangi yönde hareket edeceğini belirler.
-		// printf("data.pos[%d] = %f\n", i, data->pos[i]);
-		// printf("data.map_pos[%d] = %d\n", i, data->map_pos[i]);
-		// printf("data.delta_dist[%d] = %f\n", i, data->delta_dist[i]);
 		if (data->raydir[i] < 0)
 		{
 			data->step[i] = -1;
@@ -110,18 +107,18 @@ void	calculate_wall_properties(t_data *data)
 	if (data->draw_end >= HEIGHT)//duvar ekranın alt sınırına aşınca görüntü bozuluyor.
 		data->draw_end = HEIGHT - 1;
 
-	data->wall_x = data->pos[!data->side] + data->perp_wall_dist
+	data->wall_x = data->pos[!data->side] + data->perp_wall_dist // burda data.pos[!data->side]'da !data side yerine 1 koyalım.  (ışının duvara çarğtığı notanın x kordinatı)
 		* data->raydir[!data->side];
 
 	data->wall_x -= (int)data->wall_x;
 
 	data->tex[0] = (int)(data->wall_x * TEXWIDTH);
 
-	if (data->side == 0 && data->raydir[0] < 0)
+	if (data->side == 0 && data->raydir[0] < 0)//-----burayı anlamadım
 		data->tex[0] = TEXWIDTH - data->tex[0] - 1;
 
 	else if (data->side == 1 && data->raydir[1] > 0)
-		data->tex[0] = TEXWIDTH - data->tex[0] - 1;
+		data->tex[0] = TEXWIDTH - data->tex[0] - 1;//------  burayı anlamadım
 
 	data->step_size = (double)TEXHEIGHT / data->line_h;
 
@@ -134,11 +131,11 @@ void	render_column(t_data *data, int x, int y)
 	while (++y < HEIGHT)
 	{
 		data->tex[1] = data->tex_pos;
-		if (y < data->draw_start)
+		if (y < data->draw_start)// gökyüzünü çiziyoruz.
 			set_pixel_color(data, x, y, data->colors[1]);
-		else if (y > data->draw_end)
+		else if (y > data->draw_end)// zemini çiziyoruz.
 			set_pixel_color(data, x, y, data->colors[0]);
-		else
+		else		// duvarı çiziyoruz.
 		{
 			render_texture(data, x, y);
 			data->tex_pos += data->step_size;

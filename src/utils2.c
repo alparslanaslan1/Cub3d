@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsen <bsen@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
+/*   By: alpaslan <alpaslan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 17:14:20 by bsen              #+#    #+#             */
-/*   Updated: 2024/11/19 17:22:00 by bsen             ###   ########.fr       */
+/*   Updated: 2024/11/22 23:24:40 by alpaslan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,16 @@
 
 void	set_pixel_color(t_data *data, int x, int y, int color)
 {
+	//data->image->addr = ekran belleğimie erişim için
+	//y * WIDTH + x = x ve y koordinatlarındaki pikselin adresi
 	data->image->addr[y * WIDTH + x] = color;
 }
 
 void	render_texture(t_data *data, int x, int y)
 {
-	if (data->side == 1)
+	if (data->side == 1) // kzuey veya güney
 	{
-		if (data->raydir[1] < 0)
+		if (data->raydir[1] < 0)//raydir[1] negatifses ışın kuzueye çarpıyor demektir. ve north image basıyız bu yüzden.
 			set_pixel_color(data, x, y, data->north->addr[TEXHEIGHT
 				* data->tex[1] + data->tex[0]]);
 		else
