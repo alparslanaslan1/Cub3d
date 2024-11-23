@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsen <bsen@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
+/*   By: alpaslan <alpaslan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 20:34:03 by bsen              #+#    #+#             */
-/*   Updated: 2024/11/15 21:47:47 by bsen             ###   ########.fr       */
+/*   Updated: 2024/11/23 18:42:52 by alpaslan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,26 @@
 
 void	rotate(t_data *data)
 {
-	double	oldirx;
-	double	oldplanex;
-	double	rotationangle;
+	double	old_dir_x;
+	double	old_plane_x;
+	double	rotation_angle;
 
 	if (data->right)
-		rotationangle = data->player.rot;
+		rotation_angle = data->player.rot;
 	else if (data->left)
-		rotationangle = -data->player.rot;
+		rotation_angle = -data->player.rot;
 	if (data->right || data->left)
 	{
-		oldirx = data->dir[0];
-		data->dir[0] = data->dir[0] * cos(rotationangle) - data->dir[1]
-			* sin(rotationangle);
-		data->dir[1] = oldirx * sin(rotationangle) + data->dir[1]
-			* cos(rotationangle);
-		oldplanex = data->plane[0];
-		data->plane[0] = data->plane[0] * cos(rotationangle) - data->plane[1]
-			* sin(rotationangle);
-		data->plane[1] = oldplanex * sin(rotationangle) + data->plane[1]
-			* cos(rotationangle);
+		old_dir_x = data->dir[0];
+		data->dir[0] = data->dir[0] * cos(rotation_angle) - data->dir[1]
+			* sin(rotation_angle);
+		data->dir[1] = old_dir_x * sin(rotation_angle) + data->dir[1]
+			* cos(rotation_angle);
+		old_plane_x = data->camera_plane[0];
+		data->camera_plane[0] = data->camera_plane[0] * cos(rotation_angle) - data->camera_plane[1]
+			* sin(rotation_angle);
+		data->camera_plane[1] = old_plane_x * sin(rotation_angle) + data->camera_plane[1]
+			* cos(rotation_angle);
 	}
 }
 
@@ -56,14 +56,14 @@ void	handle_movement(t_data *data, double move_x, double move_y)
 {
 	if (data->a)
 	{
-		move_x = -data->plane[0] * data->player.speed;
-		move_y = -data->plane[1] * data->player.speed;
+		move_x = -data->camera_plane[0] * data->player.speed;
+		move_y = -data->camera_plane[1] * data->player.speed;
 		move_player(data, move_x, move_y);
 	}
 	if (data->d)
 	{
-		move_x = data->plane[0] * data->player.speed;
-		move_y = data->plane[1] * data->player.speed;
+		move_x = data->camera_plane[0] * data->player.speed;
+		move_y = data->camera_plane[1] * data->player.speed;
 		move_player(data, move_x, move_y);
 	}
 	if (data->w)

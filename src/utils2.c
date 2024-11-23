@@ -6,7 +6,7 @@
 /*   By: alpaslan <alpaslan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 17:14:20 by bsen              #+#    #+#             */
-/*   Updated: 2024/11/22 23:24:40 by alpaslan         ###   ########.fr       */
+/*   Updated: 2024/11/23 17:41:32 by alpaslan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,23 @@ void	set_pixel_color(t_data *data, int x, int y, int color)
 
 void	render_texture(t_data *data, int x, int y)
 {
-	if (data->side == 1) // kzuey veya güney
+	if (data->hit_axis == 1) // kzuey veya güney
 	{
-		if (data->raydir[1] < 0)//raydir[1] negatifses ışın kuzueye çarpıyor demektir. ve north image basıyız bu yüzden.
+		if (data->ray_direction[1] < 0)//raydir[1] negatifses ışın kuzueye çarpıyor demektir. ve north image basıyız bu yüzden.
 			set_pixel_color(data, x, y, data->north->addr[TEXHEIGHT
-				* data->tex[1] + data->tex[0]]);
+				* data->tex_column[1] + data->tex_column[0]]);
 		else
 			set_pixel_color(data, x, y, data->south->addr[TEXHEIGHT
-				* data->tex[1] + data->tex[0]]);
+				* data->tex_column[1] + data->tex_column[0]]);
 	}
 	else
 	{
-		if (data->raydir[0] < 0)
+		if (data->ray_direction[0] < 0)
 			set_pixel_color(data, x, y, data->west->addr[TEXHEIGHT
-				* data->tex[1] + data->tex[0]]);
+				* data->tex_column[1] + data->tex_column[0]]);
 		else
 			set_pixel_color(data, x, y, data->east->addr[TEXHEIGHT
-				* data->tex[1] + data->tex[0]]);
+				* data->tex_column[1] + data->tex_column[0]]);
 	}
 }
 

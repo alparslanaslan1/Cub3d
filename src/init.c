@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsen <bsen@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
+/*   By: alpaslan <alpaslan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 17:46:58 by alaslan           #+#    #+#             */
-/*   Updated: 2024/11/19 17:19:12 by bsen             ###   ########.fr       */
+/*   Updated: 2024/11/23 18:42:43 by alpaslan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,22 @@
 
 void	init2(t_data *data)
 {
-	data->map_pos[1] = 0;
-	data->delta_dist[0] = 0;
-	data->delta_dist[1] = 0;
-	data->step[0] = 0;
-	data->step[1] = 0;
-	data->side_dist[0] = 0;
-	data->side_dist[1] = 0;
-	data->side = 0;
+	data->map_grid_pos[1] = 0;
+	data->grid_step_dist[0] = 0;
+	data->grid_step_dist[1] = 0;
+	data->ray_step[0] = 0;
+	data->ray_step[1] = 0;
+	data->border_dist[0] = 0;
+	data->border_dist[1] = 0;
+	data->hit_axis = 0;
 	data->perp_wall_dist = 0;
-	data->line_h = 0;
-	data->draw_start = 0;
-	data->draw_end = 0;
-	data->wall_x = 0;
-	data->tex[0] = 0;
-	data->tex[1] = 0;
-	data->step_size = 0;
+	data->wall_height = 0;
+	data->wall_top_pixel = 0;
+	data->wall_bot_pixel = 0;
+	data->hit_point_x = 0;
+	data->tex_column[0] = 0;
+	data->tex_column[1] = 0;
+	data->tex_step = 0;
 	data->tex_pos = 0;
 }
 
@@ -48,14 +48,14 @@ void	player_init(t_data *data)
 	data->right = false;
 	data->dir[0] = 0;
 	data->dir[1] = 0;
-	data->plane[0] = 0;
-	data->plane[1] = 0;
+	data->camera_plane[0] = 0;
+	data->camera_plane[1] = 0;
 	data->pos[0] = data->player.x;
 	data->pos[1] = data->player.y;
-	data->raydir[0] = 0;
-	data->raydir[1] = 0;
-	data->camera_x = 0;
-	data->map_pos[0] = 0;
+	data->ray_direction[0] = 0;
+	data->ray_direction[1] = 0;
+	data->ray_screen_x = 0;
+	data->map_grid_pos[0] = 0;
 	init2(data);
 }
 
@@ -65,16 +65,16 @@ static bool	east_west(t_data *data)
 	{
 		data->dir[0] = -1;
 		data->dir[1] = 0;
-		data->plane[0] = 0;
-		data->plane[1] = -0.66;
+		data->camera_plane[0] = 0;
+		data->camera_plane[1] = -0.66;
 		return (true);
 	}
 	else if (data->player.player_dir == 'E')
 	{
 		data->dir[0] = 1;
 		data->dir[1] = 0;
-		data->plane[0] = 0;
-		data->plane[1] = 0.66;
+		data->camera_plane[0] = 0;
+		data->camera_plane[1] = 0.66;
 		return (true);
 	}
 	return (false);
@@ -86,16 +86,16 @@ static bool	south_north(t_data *data)
 	{
 		data->dir[0] = 0;
 		data->dir[1] = 1;
-		data->plane[0] = -0.66;
-		data->plane[1] = 0;
+		data->camera_plane[0] = -0.66;
+		data->camera_plane[1] = 0;
 		return (true);
 	}
 	else if (data->player.player_dir == 'N')
 	{
 		data->dir[0] = 0;
 		data->dir[1] = -1;
-		data->plane[0] = 0.66;
-		data->plane[1] = 0;
+		data->camera_plane[0] = 0.66;
+		data->camera_plane[1] = 0;
 		return (true);
 	}
 	return (false);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsen <bsen@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
+/*   By: alpaslan <alpaslan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 19:16:35 by bsen              #+#    #+#             */
-/*   Updated: 2024/11/19 19:19:08 by bsen             ###   ########.fr       */
+/*   Updated: 2024/11/23 18:41:02 by alpaslan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,22 +79,22 @@ typedef struct s_data
 	int			left;
 	int			*color;
 	double		dir[2];         // Oyuncunun yönü (x, y)
-	double		plane[2];       // Kamera düzlemi (x, y)
+	double		camera_plane[2];       // Kamera düzlemi (x, y)
 	double		pos[2];         // Oyuncunun pozisyonu (x, y)
-	double		raydir[2];      // Işın yönü (x, y)
-	double		camera_x;       // Kamera x koordinatı
-	int			map_pos[2];        // Harita pozisyonu (x, y)
-	double		delta_dist[2];  // Kareler arası mesafe (x, y)
-	int			step[2];           // Adım yönü (x, y)
-	double		side_dist[2];   // Duvarlara olan yan mesafeler (x, y)
-	int			side;              // Çarpan duvar yönü
+	double		ray_direction[2];      // Işın yönü (x, y)
+	double		ray_screen_x;       // Kamera x koordinatı
+	int			map_grid_pos[2];        // Harita pozisyonu (x, y)
+	double		grid_step_dist[2];  // Kareler arası mesafe (x, y)
+	int			ray_step[2];           // Adım yönü (x, y)
+	double		border_dist[2];   // Duvarlara olan yan mesafeler (x, y)
+	int			hit_axis;              // Çarpan duvar yönü
 	double		perp_wall_dist; // Duvarın oyuncuya dik mesafesi
-	int			line_h;            // Duvar çizim yüksekliği
-	int			draw_start;        // Çizim başlangıç noktası
-	int			draw_end;          // Çizim bitiş noktası
-	double		wall_x;         // Duvar x koordinatı
-	int			tex[2];            // Doku koordinatları (x, y)
-	double		step_size;      // Doku adım boyutu
+	int			wall_height;            // Duvar çizim yüksekliği
+	int			wall_top_pixel;        // Çizim başlangıç noktası
+	int			wall_bot_pixel;          // Çizim bitiş noktası
+	double		hit_point_x;         // Duvar x koordinatı
+	int			tex_column[2];            // Doku koordinatları (x, y)
+	double		tex_step;      // Doku adım boyutu
 	double		tex_pos;        // Doku pozisyonu
 	int			colors[2];         // RGB renkler
 }				t_data;
@@ -118,10 +118,10 @@ int				key_unpress(int keyCode, t_data *data);
 void			move_player(t_data *data, double moveX, double moveY);
 void			handle_movement(t_data *data, double move_x, double move_y);
 
-void			calculate_ray_direction_and_distances(t_data *data, int x);
-void			calculate_step(t_data *data);
+void			compute_ray_properties(t_data *data, int x);
+void			compute_ray_step_and_distance(t_data *data);
 void			calculate_collision_distance(t_data *data);
-void			calculate_wall_properties(t_data *data);
+void			compute_wall_dimensions_and_texture(t_data *data);
 void			rotate(t_data *data);
 void			render_column(t_data *data, int x, int y);
 void			ft_free(char **s);

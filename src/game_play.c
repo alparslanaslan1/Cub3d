@@ -6,7 +6,7 @@
 /*   By: alpaslan <alpaslan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 17:47:04 by alaslan           #+#    #+#             */
-/*   Updated: 2024/11/21 02:26:25 by alpaslan         ###   ########.fr       */
+/*   Updated: 2024/11/23 17:42:02 by alpaslan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@ static void	raycast(t_data *data)
 	x = -1;
 	while (++x < 720) // Ekranın genişliği boyunca döngü
 	{
-		calculate_ray_direction_and_distances(data, x);
+		compute_ray_properties(data, x);
 			// Işın yönü ve mesafelerini hesaplar
-		calculate_step(data);
+		compute_ray_step_and_distance(data);
 			// Işın adımını ve çarpma noktasını hesaplar
 		calculate_collision_distance(data);
 			// Işın çarptığı duvara kadar olan mesafeyi hesaplar
-		calculate_wall_properties(data);
+		compute_wall_dimensions_and_texture(data);
 			// Duvar özelliklerini hesaplar
 		render_column(data, x, -1);
 			// Duvarı sütun olarak çizer
