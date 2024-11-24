@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alpaslan <alpaslan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaslan <alaslan@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 20:33:57 by bsen              #+#    #+#             */
-/*   Updated: 2024/11/23 18:41:09 by alpaslan         ###   ########.fr       */
+/*   Updated: 2024/11/24 14:20:20 by alaslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	compute_ray_properties(t_data *data, int x)
 	//data.raydir = ışın yönü. = bakış yönü + kamera düzlemi * kamera_x
 	data->ray_direction[0] = data->dir[0] + data->camera_plane[0] * data->ray_screen_x;
 	data->ray_direction[1] = data->dir[1] + data->camera_plane[1] * data->ray_screen_x;
+
 	data->map_grid_pos[0] = (int)data->pos[0];
 	data->map_grid_pos[1] = (int)data->pos[1];
 	//delta.dist = ışıının çarptığı ızgaralar arasındaki mesafe.
@@ -61,7 +62,7 @@ void	compute_ray_step_and_distance(t_data *data)
 		}
 		else
 		{
-			data->ray_step[i] = 0;
+			data->ray_step[i] = 1;
 			data->border_dist[i] = (data->map_grid_pos[i] + 1.0 - data->pos[i])
 				* data->grid_step_dist[i];
 		}

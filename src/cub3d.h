@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alpaslan <alpaslan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaslan <alaslan@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 19:16:35 by bsen              #+#    #+#             */
-/*   Updated: 2024/11/23 18:41:02 by alpaslan         ###   ########.fr       */
+/*   Updated: 2024/11/24 15:48:28 by alaslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ void	xpm_init(t_data *data, int a, int b);
 void	mlx_create(t_data *data);
 bool	check_player(t_data *data);
 void clear_color(char ***f, char ***c, char *f_code, char *c_code);
-
+int	exit_cross();
 
 
 

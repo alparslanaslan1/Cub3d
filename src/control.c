@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   control.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsen <bsen@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
+/*   By: alaslan <alaslan@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 23:30:07 by bsen              #+#    #+#             */
-/*   Updated: 2024/11/19 17:23:24 by bsen             ###   ########.fr       */
+/*   Updated: 2024/11/24 16:20:59 by alaslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,8 @@ void	map_parsing(t_data *data)
 	}
 	find_player(virtual_map, data);
 	map_playable(data, virtual_map, data->x, data->y);
-	// ft_free(virtual_map);
+	if (virtual_map != NULL)
+		ft_free(virtual_map);
 }
 
 void	map_playable(t_data *data, char **i_map, int x, int y)

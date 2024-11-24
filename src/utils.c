@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsen <bsen@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
+/*   By: alaslan <alaslan@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 08:12:54 by alaslan           #+#    #+#             */
-/*   Updated: 2024/11/19 19:15:54 by bsen             ###   ########.fr       */
+/*   Updated: 2024/11/24 16:21:33 by alaslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,14 @@ char	**creat_vrmap(char **virtual_map, t_data *data)
 	int	i;
 
 	i = 0;
-	virtual_map = (char **)malloc((sizeof(char *) * data->row_length));
+	virtual_map = (char **)malloc((sizeof(char *) * 256));
 	if (!virtual_map)
 		ft_exit("malloc error", data);
+	printf("data.long%d\n", data->longest_line);
+	printf("data.row%d\n", data->row_length);
 	while (i < data->row_length)
 	{
-		virtual_map[i] = (char *)malloc((sizeof(char) * data->longest_line)
+		virtual_map[i] = (char *)malloc((sizeof(char) * 1024)
 				+ 1);
 		if (!virtual_map[i])
 			ft_free(virtual_map);
@@ -116,4 +118,8 @@ void	chech_texture(char *s, t_data *data)
 		data->f = ft_substr(s, 2, ft_strlen(s));
 	else if (ft_strncmp(s, "C ", 2) == 0)
 		data->c = ft_substr(s, 2, ft_strlen(s));
+	// 	if (data->no_text == NULL || data->we_text == NULL
+	// 		|| data->so_text == NULL || data->ea_text == NULL || data->f == NULL
+	// 		|| data->c == NULL)
+	// 		ft_exit("hata", data);
 }

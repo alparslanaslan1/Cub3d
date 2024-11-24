@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_play.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alpaslan <alpaslan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alaslan <alaslan@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 17:47:04 by alaslan           #+#    #+#             */
-/*   Updated: 2024/11/23 17:42:02 by alpaslan         ###   ########.fr       */
+/*   Updated: 2024/11/24 14:48:26 by alaslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 int	key_press(int keyCode, t_data *data)
 {
 	if (keyCode == 53)
-		exit(0);//------------
+		ft_exit("bitti", data);//------------
 	if (keyCode == 13)
 		data->w = true;
 	if (keyCode == 1)

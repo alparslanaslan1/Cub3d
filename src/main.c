@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsen <bsen@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
+/*   By: alaslan <alaslan@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 19:15:40 by bsen              #+#    #+#             */
-/*   Updated: 2024/11/16 03:48:17 by bsen             ###   ########.fr       */
+/*   Updated: 2024/11/24 14:56:53 by alaslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,11 @@ void	file_control(t_data *data)
 
 char	*private_line(char *tmp, char *line, int fd)
 {
-	return (free(tmp), free(line), get_next_line(fd));
+	if (tmp)
+		free(tmp);
+	if (line)
+		free(line);
+	return (get_next_line(fd));  //get_next_line NULL döndürebilir.
 }
 
 int	read_map(t_data *data)
@@ -65,9 +69,9 @@ int	read_map(t_data *data)
 		data->row_length++;
 		tmp = ft_strdup(data->map);
 		free(data->map);
-		data->map = ft_strjoin(tmp, line);
+		data->map = ft_strjoin(tmp, line);  // burda joinden NULL dönme durumu var.
 	}
-	return (data->map2d = ft_split(data->map, '\n'), close(data->fd), 0);
+	return (data->map2d = ft_split(data->map, '\n'), close(data->fd), 0);//split'ten NULL dönebilir.
 }
 
 void	data_init(t_data *data)
@@ -104,7 +108,7 @@ int	main(int ac, char **av)
 		game_create(&data);
 		mlx_hook(data.win, 2, 0, key_press, &data);
 		mlx_hook(data.win, 3, 0, key_unpress, &data);
-		mlx_hook(data.win, 17, 0, ft_exit, "finish");
+		mlx_hook(data.win, 17, 0, exit_cross, "finish");// çarpı ile exit nasıl olacak bakacazz.
 		mlx_loop_hook(data.mlx_ptr, &gamefunc, &data);
 		mlx_loop(data.mlx_ptr);
 	}

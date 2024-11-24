@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bsen <bsen@student.42kocaeli.com.tr>       +#+  +:+       +#+        */
+/*   By: alaslan <alaslan@student.42kocaeli.com.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 04:12:03 by alaslan           #+#    #+#             */
-/*   Updated: 2024/11/15 20:32:49 by bsen             ###   ########.fr       */
+/*   Updated: 2024/11/24 15:58:57 by alaslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,16 @@ void	ft_free(char **s)
 	int	i;
 
 	i = -1;
+	if (!s)
+		return;
 	while (s[++i] != NULL)
+	{
 		free(s[i]);
-	if (s)
-		free(s);
+		s[i] = NULL;
+	}
+	free(s);
+	s = NULL;
+
 }
 
 void	free_texture(t_data *data)
@@ -48,5 +54,10 @@ int	ft_exit(char *error_massage, t_data *data)
 		ft_free(data->map2d);
 	free_texture(data);
 	printf("%s", error_massage);
+	exit(1);
+}
+
+int	exit_cross()
+{
 	exit(1);
 }
